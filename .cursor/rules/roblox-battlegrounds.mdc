@@ -1,0 +1,229 @@
+---
+description: This game combines strategic thinking with meme culture, creating a unique and engaging experience that appeals to internet-savvy players while maintaining the depth and replayability of auto-battler games.
+alwaysApply: false
+---
+
+# Roblox Battlegrounds - Meme Auto-Battler Game
+
+## Game Concept
+
+A Roblox auto-battler game inspired by Hearthstone Battlegrounds where players collect and battle with meme-themed minions instead of fantasy creatures. Players compete to be the last one standing by strategically building their meme army.
+
+## Core Gameplay Loop
+
+1. **Draft Phase**: Players select minions from a tavern to add to their board
+2. **Battle Phase**: Minions automatically fight against other players' boards
+3. **Elimination**: Players are eliminated when their health reaches 0
+4. **Victory**: Last player standing wins the game
+
+## Minion Types (Tribes)
+
+Instead of traditional fantasy tribes, use meme-based categories:
+
+### Human Memes
+
+- **Povar**: Povar character
+- **Melon Tusk**: Meme version of Elon Musk
+
+### Classic Memes
+
+- **Pepe the Frog**: Classic internet meme character
+- **Wojak**: Sad/emotional meme character
+- **Chad**: Confident/alpha male meme
+
+### Anime Memes
+
+- **Chad Anime**: Confident anime character
+- **Anime Girl**: Various anime female characters
+- **Anime Boy**: Various anime male characters
+- **Weeb**: Anime enthusiast stereotype
+- **Saitama**: One Punch Man meme
+
+### Animal Memes
+
+- **Doge**: Shiba Inu dog meme
+- **Nyan Cat**: Flying cat with rainbow trail
+- **Grumpy Cat**: Frowning cat meme
+- **Duck**: Various duck memes
+- **Frog**: Pepe and other frog memes
+
+### Cartoon Memes
+
+- **SpongeBob**: Various SpongeBob characters
+- **Rick & Morty**: Characters from the show
+- **Family Guy**: Characters from the show
+- **Simpsons**: Characters from the show
+- **Adventure Time**: Characters from the show
+
+### Viral Memes
+
+- **Gnome**: Some viral gnome meme
+
+## Minion Stats & Abilities
+
+Each minion has:
+
+- **Attack**: Damage dealt in battle
+- **Health**: How much damage they can take
+- **Tribe**: Their meme category (Human, Anime, Animal, Cartoon, Meme)
+- **Ability**: Special effect that triggers under certain conditions
+- **Tier**: Rarity/power level (1-6 stars)
+
+## Tribal Synergies
+
+When you have multiple minions of the same tribe, they gain bonuses:
+
+### Human Memes
+
+- **3 Human**: +1/+1 to all Human minions
+- **6 Human**: +2/+2 to all Human minions, Humans gain "Chad Energy" (bonus attack on first hit)
+
+### Anime Memes
+
+- **3 Anime**: +1/+1 to all Anime minions
+- **6 Anime**: +2/+2 to all Anime minions, Anime minions gain "Plot Armor" (chance to survive fatal damage)
+
+### Animal Memes
+
+- **3 Animal**: +1/+1 to all Animal minions
+- **6 Animal**: +2/+2 to all Animal minions, Animals gain "Pack Mentality" (bonus attack when adjacent to other Animals)
+
+### Cartoon Memes
+
+- **3 Cartoon**: +1/+1 to all Cartoon minions
+- **6 Cartoon**: +2/+2 to all Cartoon minions, Cartoon minions gain "4th Wall Break" (ignore enemy abilities once per battle)
+
+### Internet Memes
+
+- **3 Internet**: +1/+1 to all Internet minions
+- **6 Internet**: +2/+2 to all Internet minions, Internet minions gain "Viral Spread" (copy abilities from adjacent minions)
+
+## Game Mechanics
+
+### Tavern Tiers
+
+- **Tier 1**: Basic meme minions (1-star)
+- **Tier 2**: Uncommon meme minions (2-star)
+- **Tier 3**: Rare meme minions (3-star)
+- **Tier 4**: Epic meme minions (4-star)
+- **Tier 5**: Legendary meme minions (5-star)
+- **Tier 6**: Mythic meme minions (6-star)
+
+### Economy System
+
+- **Gold**: Earned each turn, used to buy minions and upgrade tavern
+- **Tavern Upgrade Cost**: Increases with each tier
+- **Minion Cost**: Based on tier and rarity
+- **Selling**: Get gold back when selling minions
+
+### Battle System
+
+- **Turn Order**: Random pairing each round
+- **Attack Order**: Left to right, then random targeting
+- **Death**: Minions are removed when health reaches 0
+- **Damage**: Players take damage based on surviving enemy minions
+
+### Hero Abilities
+
+Each player chooses a hero with unique abilities:
+
+- **Meme Lord**: Start with extra gold each turn
+- **Viral Creator**: Minions cost less gold
+- **Trend Setter**: Start with a random high-tier minion
+- **Internet Historian**: Can see what minions other players have
+- **Meme Collector**: Gain bonuses for having diverse tribes
+
+## Technical Implementation
+
+### Data Structures
+
+```typescript
+interface Minion {
+	id: string;
+	name: string;
+	attack: number;
+	health: number;
+	tribe: MemeTribe;
+	ability: MinionAbility;
+	tier: number;
+	image: string;
+}
+
+interface Player {
+	userId: number;
+	name: string;
+	health: number;
+	gold: number;
+	tavernTier: number;
+	board: Minion[];
+	hand: Minion[];
+	hero: Hero;
+}
+
+interface GameState {
+	players: Player[];
+	currentTurn: number;
+	phase: GamePhase;
+	roundNumber: number;
+}
+```
+
+### Game Phases
+
+1. **Lobby**: Players join and select heroes
+2. **Draft**: Players buy minions and build their board
+3. **Battle**: Minions fight automatically
+4. **Results**: Damage calculation and elimination checks
+5. **Cleanup**: Remove dead minions, award gold
+
+### Battle Logic
+
+- Minions attack in order (left to right)
+- Random targeting for enemy minions
+- Abilities trigger based on conditions
+- Tribal synergies apply bonuses
+- Battle continues until one side is eliminated
+
+### AI for Single Player
+
+- Computer players follow strategic patterns
+- Focus on tribal synergies
+- Upgrade tavern at appropriate times
+- Balance between buying minions and upgrading
+
+## UI/UX Considerations
+
+- **Tavern Interface**: Grid of available minions to purchase
+- **Board View**: Player's current minion lineup
+- **Battle Animation**: Visual representation of minion fights
+- **Tribe Indicators**: Clear visual cues for minion types
+- **Synergy Display**: Show current tribal bonuses
+- **Hero Selection**: Choose hero at game start
+
+## Monetization Ideas
+
+- **Battle Pass**: Seasonal rewards and exclusive minions
+- **Cosmetic Packs**: Special minion skins and effects
+- **Tavern Themes**: Different visual styles for the shop
+- **Emotes**: Battle taunts and celebrations
+- **Boosts**: Temporary advantages (use sparingly)
+
+## Future Expansions
+
+- **New Tribes**: Add more meme categories
+- **Seasonal Events**: Limited-time minions and themes
+- **Tournament Mode**: Competitive ranked play
+- **Custom Games**: Private matches with friends
+- **Minion Trading**: Exchange minions between players
+- **Achievement System**: Unlock rewards for milestones
+
+## Development Priorities
+
+1. **Core Game Loop**: Basic drafting and battling
+2. **Minion System**: Create initial set of meme minions
+3. **Battle Engine**: Implement automatic combat
+4. **Tribal Synergies**: Add tribe-based bonuses
+5. **Hero Abilities**: Implement unique player powers
+6. **UI/UX**: Create intuitive game interface
+7. **Testing**: Balance minions and abilities
+8. **Polish**: Add animations and sound effects
