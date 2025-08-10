@@ -1,5 +1,5 @@
 import { ReplicatedStorage } from "@rbxts/services";
-import { UserEvents } from "./user-events";
+import { PlayerEvents } from "./player-events";
 
 export type EventTypes = {
 	RemoteFunction: RemoteFunction;
@@ -16,7 +16,7 @@ Bindable Events [Server -> Server or Client -> Client]
 */
 
 export const EVENTS_REGISTRY = {
-	User: UserEvents,
+	Player: PlayerEvents,
 } as const;
 
 export type EventsFolderName = keyof typeof EVENTS_REGISTRY;

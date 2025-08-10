@@ -1,0 +1,21 @@
+export type PlayerData = {
+	userId: number;
+	username: string;
+	rating: number;
+	tutorialCompleted: boolean;
+	lastSavedAt: number;
+	firstPlaceCount: number;
+	secondPlaceCount: number;
+	thirdPlaceCount: number;
+	fourthPlaceCount: number;
+	lossesCount: number;
+	gamesCount: number;
+	creaturesBoughtCount: number;
+	creaturesSoldCount: number;
+	creaturesPlayedCount: number;
+	creaturesKilledCount: number;
+	creaturesEvolvedCount: number;
+	joinCount: number;
+	joinedAt: number;
+	timePlayed: number;
+};

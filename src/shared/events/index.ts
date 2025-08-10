@@ -1,2 +1,2 @@
 export * from "./events-config";
-export * from "./user-events";
+export * from "./player-events";

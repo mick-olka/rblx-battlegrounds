@@ -6,7 +6,7 @@ import { App } from "./app";
 import { makeHello } from "shared/module";
 
 const Players = game.GetService("Players");
-const StarterGui = game.GetService("StarterGui");
+// const StarterGui = game.GetService("StarterGui");
 
 print(makeHello("main.client.ts"));
 
@@ -32,13 +32,6 @@ function initReact() {
 	if (Players.LocalPlayer) {
 		mountApp(Players.LocalPlayer);
 	}
-	//  else {
-	//   Players.PlayerAdded.Connect(player => {
-	//     if (player === Players.LocalPlayer) {
-	//       mountApp(player);
-	//     }
-	//   });
-	// }
 }
 
 initReact();
