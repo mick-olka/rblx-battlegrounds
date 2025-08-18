@@ -5,6 +5,8 @@ export const PlayerEvents = {
 	// Remote Events [Client <-> Server]
 	PlayerTestRE: { name: "PlayerTestRE", type: "RemoteEvent" },
 	PlayerDataReadyRE: { name: "PlayerDataReadyRE", type: "RemoteEvent" },
+	PlayerMovementEnableRE: { name: "PlayerMovementEnableRE", type: "RemoteEvent" },
+	PlayerMovementDisableRE: { name: "PlayerMovementDisableRE", type: "RemoteEvent" },
 
 	// Bindable Functions [Server -> Server or Client -> Client]
 	PlayerTestBF: { name: "PlayerTestBF", type: "BindableFunction" },

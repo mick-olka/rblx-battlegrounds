@@ -1,13 +1,37 @@
 import { PlayerData } from "shared/types";
-import { DataStoreService, Players } from "@rbxts/services";
+import { DataStoreService, Players, UserInputService } from "@rbxts/services";
 import { getEvent } from "shared/events";
 
 // ========= VARIABLES =========
 
 export const DATA_STORE_NAME = "Battlegrounds_UserData";
 const dataStore = DataStoreService.GetDataStore(DATA_STORE_NAME);
+const userInputService = game.GetService("UserInputService");
 
 // ========= FUNCTIONS =========
+
+const isMobile = () => {
+	return UserInputService.TouchEnabled;
+};
+
+// const removeMobileMovementGui = (player: Player) => {
+// 	if (isMobile()) {
+// 		print("Removing mobile movement GUI");
+// 		// Disable the player's GUI on mobile using StarterGui service
+// 		// This will disable core mobile controls like the joystick
+// 		const starterGui = game.GetService("StarterGui");
+// 		starterGui.SetCoreGuiEnabled(Enum.CoreGuiType.All, false);
+// 	}
+// };
+
+// const enableMobileMovementGui = (player: Player) => {
+// 	if (isMobile()) {
+// 		print("Re-enabling mobile movement GUI");
+// 		// Re-enable the player's GUI on mobile
+// 		const starterGui = game.GetService("StarterGui");
+// 		starterGui.SetCoreGuiEnabled(Enum.CoreGuiType.All, true);
+// 	}
+// };
 
 const getDefaultUserData = (player: Player): PlayerData => {
 	return {
@@ -96,6 +120,33 @@ Players.PlayerAdded.Connect((player: Player) => {
 Players.PlayerRemoving.Connect((player: Player) => {
 	handlePlayerLeave(player);
 	getEvent("Player", "PlayerDisconnectedBE", "BindableEvent").Fire(player);
+});
+
+getEvent("Player", "PlayerMovementEnableRE", "RemoteEvent").OnServerEvent.Connect((player: Player) => {
+	const character = player.Character;
+	if (!character) return;
+	const humanoid = character.FindFirstChildOfClass("Humanoid");
+	print(humanoid);
+	if (!humanoid) return;
+	humanoid.WalkSpeed = 20;
+	humanoid.JumpHeight = 50;
+	humanoid.JumpPower = 50;
+
+	// Re-enable mobile GUI when movement is enabled
+	// enableMobileMovementGui(player);
+});
+
+getEvent("Player", "PlayerMovementDisableRE", "RemoteEvent").OnServerEvent.Connect((player: Player) => {
+	const character = player.Character;
+	if (!character) return;
+	const humanoid = character.FindFirstChildOfClass("Humanoid");
+	if (!humanoid) return;
+	humanoid.WalkSpeed = 0;
+	humanoid.JumpHeight = 0;
+	humanoid.JumpPower = 0;
+
+	// Disable mobile GUI when movement is disabled
+	// removeMobileMovementGui(player);
 });
 
 // ==========================

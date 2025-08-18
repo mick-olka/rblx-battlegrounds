@@ -2,7 +2,7 @@
 import { createRoot } from "@rbxts/react-roblox";
 import React, { StrictMode } from "@rbxts/react";
 import { createPortal } from "@rbxts/react-roblox";
-import { App } from "./app";
+import { App } from "./ui/app";
 import { makeHello } from "shared/module";
 
 const Players = game.GetService("Players");

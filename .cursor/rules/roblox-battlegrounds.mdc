@@ -12,7 +12,7 @@ A Roblox auto-battler game inspired by Hearthstone Battlegrounds where players c
 ## Core Gameplay Loop
 
 1. **Draft Phase**: Players select minions from a tavern to add to their board
-2. **Battle Phase**: Minions automatically fight against other players' boards
+2. **Battle Phase**: Players fight in pairs (their minions automatically fight each other)
 3. **Elimination**: Players are eliminated when their health reaches 0
 4. **Victory**: Last player standing wins the game
 
@@ -20,18 +20,18 @@ A Roblox auto-battler game inspired by Hearthstone Battlegrounds where players c
 
 Instead of traditional fantasy tribes, use meme-based categories:
 
-### Human Memes
+### Human
 
 - **Povar**: Povar character
 - **Melon Tusk**: Meme version of Elon Musk
 
-### Classic Memes
+### Classic meme
 
 - **Pepe the Frog**: Classic internet meme character
 - **Wojak**: Sad/emotional meme character
 - **Chad**: Confident/alpha male meme
 
-### Anime Memes
+### Anime
 
 - **Chad Anime**: Confident anime character
 - **Anime Girl**: Various anime female characters
@@ -39,7 +39,7 @@ Instead of traditional fantasy tribes, use meme-based categories:
 - **Weeb**: Anime enthusiast stereotype
 - **Saitama**: One Punch Man meme
 
-### Animal Memes
+### Animal
 
 - **Doge**: Shiba Inu dog meme
 - **Nyan Cat**: Flying cat with rainbow trail
@@ -47,7 +47,7 @@ Instead of traditional fantasy tribes, use meme-based categories:
 - **Duck**: Various duck memes
 - **Frog**: Pepe and other frog memes
 
-### Cartoon Memes
+### Cartoon
 
 - **SpongeBob**: Various SpongeBob characters
 - **Rick & Morty**: Characters from the show
@@ -55,9 +55,9 @@ Instead of traditional fantasy tribes, use meme-based categories:
 - **Simpsons**: Characters from the show
 - **Adventure Time**: Characters from the show
 
-### Viral Memes
+### Brainrot
 
-- **Gnome**: Some viral gnome meme
+- **Bombardilo crocodilo**: Some viral brainrot meme
 
 ## Minion Stats & Abilities
 
@@ -65,38 +65,20 @@ Each minion has:
 
 - **Attack**: Damage dealt in battle
 - **Health**: How much damage they can take
-- **Tribe**: Their meme category (Human, Anime, Animal, Cartoon, Meme)
-- **Ability**: Special effect that triggers under certain conditions
+- **Tribe**: Their meme category (Human, Anime, Animal, Cartoon, Brainrot)
+- **Abilities**: Special effect that triggers under certain conditions (reborn, battlecry, curse, trigger, bait, bubble, poison, rage)
 - **Tier**: Rarity/power level (1-6 stars)
 
-## Tribal Synergies
+## Minion abilities
 
-When you have multiple minions of the same tribe, they gain bonuses:
-
-### Human Memes
-
-- **3 Human**: +1/+1 to all Human minions
-- **6 Human**: +2/+2 to all Human minions, Humans gain "Chad Energy" (bonus attack on first hit)
-
-### Anime Memes
-
-- **3 Anime**: +1/+1 to all Anime minions
-- **6 Anime**: +2/+2 to all Anime minions, Anime minions gain "Plot Armor" (chance to survive fatal damage)
-
-### Animal Memes
-
-- **3 Animal**: +1/+1 to all Animal minions
-- **6 Animal**: +2/+2 to all Animal minions, Animals gain "Pack Mentality" (bonus attack when adjacent to other Animals)
-
-### Cartoon Memes
-
-- **3 Cartoon**: +1/+1 to all Cartoon minions
-- **6 Cartoon**: +2/+2 to all Cartoon minions, Cartoon minions gain "4th Wall Break" (ignore enemy abilities once per battle)
-
-### Internet Memes
-
-- **3 Internet**: +1/+1 to all Internet minions
-- **6 Internet**: +2/+2 to all Internet minions, Internet minions gain "Viral Spread" (copy abilities from adjacent minions)
+- **Reborn**: After death, minion is returned to the field with 1 health
+- **Battlecry**: Effect is triggered when minion is played (put on the table)
+- **Curse**: Effect is triggered when minion is destroyed
+- **Trigger**: Does something on attack
+- **Bait**: Minion is being targeted first
+- **Bubble**: Minion has a shield that can withstand any damage one time before breaking
+- **Poison**: Any non-zero damage by this minion is lethal
+- **Rage**: Minion attacks twice in a row if survived first attack
 
 ## Game Mechanics
 
@@ -111,31 +93,31 @@ When you have multiple minions of the same tribe, they gain bonuses:
 
 ### Economy System
 
-- **Gold**: Earned each turn, used to buy minions and upgrade tavern
-- **Tavern Upgrade Cost**: Increases with each tier
-- **Minion Cost**: Based on tier and rarity
-- **Selling**: Get gold back when selling minions
+- **Coins**: Earned each turn, used to buy minions and upgrade tavern
+- **Tavern Upgrade Cost**: Increases with each tier but decreases by one every round
+- **Minion Cost**: 3 coins
+- **Selling**: Get 1 coin back when selling minions
 
 ### Battle System
 
 - **Turn Order**: Random pairing each round
-- **Attack Order**: Left to right, then random targeting
-- **Death**: Minions are removed when health reaches 0
+- **Attack Order**: Left to right, random targeting (prioritizing minions with bait ability)
+- **Death**: Minions are removed when their health reaches 0
 - **Damage**: Players take damage based on surviving enemy minions
 
-### Hero Abilities
+### Hero Abilities (for version 1.1)
 
 Each player chooses a hero with unique abilities:
 
 - **Meme Lord**: Start with extra gold each turn
 - **Viral Creator**: Minions cost less gold
 - **Trend Setter**: Start with a random high-tier minion
-- **Internet Historian**: Can see what minions other players have
+- **Internet Historian**: Can roll twice
 - **Meme Collector**: Gain bonuses for having diverse tribes
 
 ## Technical Implementation
 
-### Data Structures
+### In-Match Data Structures
 
 ```typescript
 interface Minion {
@@ -170,16 +152,16 @@ interface GameState {
 
 ### Game Phases
 
-1. **Lobby**: Players join and select heroes
-2. **Draft**: Players buy minions and build their board
+1. **Lobby**: Players join (and select heroes in version 1.1)
+2. **Draft**: Players buy minions in the shop and build their board
 3. **Battle**: Minions fight automatically
 4. **Results**: Damage calculation and elimination checks
-5. **Cleanup**: Remove dead minions, award gold
+5. **Cleanup**: Remove dead players, award gold
 
 ### Battle Logic
 
 - Minions attack in order (left to right)
-- Random targeting for enemy minions
+- Random targeting for enemy minions (if no minions with bait)
 - Abilities trigger based on conditions
 - Tribal synergies apply bonuses
 - Battle continues until one side is eliminated
@@ -204,7 +186,7 @@ interface GameState {
 
 - **Battle Pass**: Seasonal rewards and exclusive minions
 - **Cosmetic Packs**: Special minion skins and effects
-- **Tavern Themes**: Different visual styles for the shop
+- **Tavern Themes**: Different visual styles for the tavern
 - **Emotes**: Battle taunts and celebrations
 - **Boosts**: Temporary advantages (use sparingly)
 
