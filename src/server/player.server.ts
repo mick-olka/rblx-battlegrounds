@@ -109,12 +109,53 @@ const handlePlayerLeave = (player: Player): void => {
 	savePlayerData(player, userData, true);
 };
 
+const disablePlayerDamage = (player: Player): void => {
+	const character = player.Character;
+	if (!character) return;
+
+	const humanoid = character.FindFirstChild("Humanoid") as Humanoid;
+	if (!humanoid) return;
+
+	humanoid.HealthChanged.Connect((health) => {
+		if (health > humanoid.MaxHealth) {
+			humanoid.Health = humanoid.MaxHealth;
+		}
+	});
+};
+
+const disablePlayerInventory = (player: Player): void => {
+	const character = player.Character;
+	if (!character) return;
+
+	// Remove existing tools
+	character.GetChildren().forEach((child) => {
+		if (child.IsA("Tool")) {
+			child.Destroy();
+		}
+	});
+
+	// Prevent new tools from being added
+	character.ChildAdded.Connect((child) => {
+		if (child.IsA("Tool")) {
+			child.Destroy();
+		}
+	});
+};
+
 // ========= EVENTS =========
 
 Players.PlayerAdded.Connect((player: Player) => {
 	handlePlayerJoin(player);
 	getEvent("Player", "PlayerDataReadyBE", "BindableEvent").Fire(player);
 	getEvent("Player", "PlayerDataReadyRE", "RemoteEvent").FireClient(player);
+
+	// Handle character spawning for this player
+	player.CharacterAdded.Connect(() => {
+		wait(1); // Wait for character to fully load
+		disablePlayerDamage(player);
+		disablePlayerInventory(player);
+		print(`✅ Player damage and inventory systems disabled for ${player.Name}`);
+	});
 });
 
 Players.PlayerRemoving.Connect((player: Player) => {
@@ -126,7 +167,6 @@ getEvent("Player", "PlayerMovementEnableRE", "RemoteEvent").OnServerEvent.Connec
 	const character = player.Character;
 	if (!character) return;
 	const humanoid = character.FindFirstChildOfClass("Humanoid");
-	print(humanoid);
 	if (!humanoid) return;
 	humanoid.WalkSpeed = 20;
 	humanoid.JumpHeight = 50;

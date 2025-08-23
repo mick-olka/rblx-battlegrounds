@@ -11,7 +11,7 @@ A Roblox auto-battler game inspired by Hearthstone Battlegrounds where players c
 
 ## Core Gameplay Loop
 
-1. **Draft Phase**: Players select minions from a tavern to add to their board
+1. **Draft Phase**: Players select minions from a Shop to add to their board
 2. **Battle Phase**: Players fight in pairs (their minions automatically fight each other)
 3. **Elimination**: Players are eliminated when their health reaches 0
 4. **Victory**: Last player standing wins the game
@@ -82,7 +82,7 @@ Each minion has:
 
 ## Game Mechanics
 
-### Tavern Tiers
+### Shop Tiers
 
 - **Tier 1**: Basic meme minions (1-star)
 - **Tier 2**: Uncommon meme minions (2-star)
@@ -93,8 +93,8 @@ Each minion has:
 
 ### Economy System
 
-- **Coins**: Earned each turn, used to buy minions and upgrade tavern
-- **Tavern Upgrade Cost**: Increases with each tier but decreases by one every round
+- **Coins**: Earned each turn, used to buy minions and upgrade Shop
+- **Shop Upgrade Cost**: Increases with each tier but decreases by one every round
 - **Minion Cost**: 3 coins
 - **Selling**: Get 1 coin back when selling minions
 
@@ -136,7 +136,7 @@ interface Player {
 	name: string;
 	health: number;
 	gold: number;
-	tavernTier: number;
+	ShopTier: number;
 	board: Minion[];
 	hand: Minion[];
 	hero: Hero;
@@ -170,12 +170,12 @@ interface GameState {
 
 - Computer players follow strategic patterns
 - Focus on tribal synergies
-- Upgrade tavern at appropriate times
+- Upgrade Shop at appropriate times
 - Balance between buying minions and upgrading
 
 ## UI/UX Considerations
 
-- **Tavern Interface**: Grid of available minions to purchase
+- **Shop Interface**: Grid of available minions to purchase
 - **Board View**: Player's current minion lineup
 - **Battle Animation**: Visual representation of minion fights
 - **Tribe Indicators**: Clear visual cues for minion types
@@ -186,7 +186,7 @@ interface GameState {
 
 - **Battle Pass**: Seasonal rewards and exclusive minions
 - **Cosmetic Packs**: Special minion skins and effects
-- **Tavern Themes**: Different visual styles for the tavern
+- **Shop Themes**: Different visual styles for the Shop
 - **Emotes**: Battle taunts and celebrations
 - **Boosts**: Temporary advantages (use sparingly)
 
